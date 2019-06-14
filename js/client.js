@@ -93,6 +93,13 @@ function generateConnectionCard(connection, newPlayerId)
     actions.appendChild(shoutButton);
     actions.appendChild(wailButton);
 
+    const rooms = document.createElement('div');
+    const roomA = generateRoomButton('a',"Goriot's Parlour", connection, newPlayerId);
+    const roomB = generateRoomButton('b',"Devil's Closet", connection, newPlayerId);
+
+    rooms.appendChild(roomA);
+    rooms.appendChild(roomB);
+
     const killConnectionButton = document.createElement('button');
     killConnectionButton.innerText = "Kill Connection";
     killConnectionButton.className = 'button-danger';
@@ -103,6 +110,7 @@ function generateConnectionCard(connection, newPlayerId)
     connectionCard.appendChild(playerId);
     connectionCard.appendChild(notifications);
     connectionCard.appendChild(actions);
+    connectionCard.appendChild(rooms);
     connectionCard.appendChild(killConnectionButton);
 
     return connectionCard;
@@ -125,7 +133,7 @@ function generateRoomButton(room, text, connection, playerId){
     roomButton.setAttribute('data-room', room);
     roomButton.innerText = text;
     roomButton.onclick = function(){
-        updateRoom(connection, playerId, this.getAttribute('data-action'))
+        updateRoom(connection, playerId, this.getAttribute('data-room'))
     }
     return roomButton;
 }
